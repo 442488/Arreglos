@@ -1,0 +1,63 @@
+/******************************************************************************
+Natalya Patricia Morales De la Vega
+Alejandra Hernández Vázquez
+
+Miercoles 09 de agosto de 2023
+Programa que busca subarray con suma máxima
+*******************************************************************************/
+#include <stdio.h>
+
+int main()
+{
+    int i;
+    int max=0, temp=0;
+	int no_element=0, posicion_final=0;
+	
+    printf("\nPrograma que busca el subarray con suma máxima\n\n");
+    
+    //Pedir elementos del arreglo
+    int size_arr;
+    printf("Inserte el tamaño de su arreglo: ");
+    scanf("%d", &size_arr);
+    int arr[size_arr];
+    for(i=0;i<=(size_arr - 1);i++)
+    {
+        printf("Escriba el valor del elemento (%d) del arreglo: ", i);
+        scanf("%d", &arr[i]);
+    }
+	
+	//Buscar suma máxima
+	for (i=0; i<size_arr;i++){
+		temp = temp + arr[i];
+		if (temp<0) { //Encuentra el número inicial del subarray
+		    temp = 0;
+		    no_element++;
+		}
+		if (max < temp){ //Encuentra el número final del subarray
+		  max = temp;
+		  posicion_final = i; 
+		}
+    }
+	
+	//Encontrar el tamaño del subarreglo
+	int size_sub;
+	size_sub = posicion_final + 1 - no_element; //se suma 1 porque los arreglos incian en cero
+	int subarr[size_sub];
+	
+	//Imprimir array
+	printf("\nArray: {");
+	for (i=0; i < size_arr ; i++){
+	    printf("%d, ", arr[i]);
+	}
+	printf("}");
+	printf("\nSuma máxima es: %d \n", max);
+
+	//Imprimir subarray
+	printf("\nLongitud del subarray: %d", size_sub);
+	printf("\nSubarray: {");
+	for (i=0; i < size_sub ; i++){
+	    subarr[i] = arr[i+no_element];
+	    printf("%d, ", subarr[i]);
+	}
+	printf("}");
+}
